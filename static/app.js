@@ -75,8 +75,7 @@ async function fetchGraph() {
         
         console.log('Graph data loaded:', {
             nodes: graphState.data.nodes.length,
-            links: graphState.data.links.length,
-            payload: payload
+            links: graphState.data.links.length
         });
         
         updateStatusCounts();
@@ -84,7 +83,7 @@ async function fetchGraph() {
         
         if (!Graph) {
             // Wait a bit to ensure container has dimensions
-            setTimeout(() => initGraph(payload), 100);
+            setTimeout(() => initGraph(payload), 150);
         } else {
             Graph.graphData(graphState.data);
         }
@@ -104,13 +103,14 @@ function initGraph(payload) {
         return;
     }
 
-    // Check container has dimensions
+    // Check container has dimensions (log but don't block)
     const rect = container.getBoundingClientRect();
     console.log('Container dimensions:', rect.width, 'x', rect.height);
     
-    if (rect.width === 0 || rect.height === 0) {
-        console.error('Container has zero dimensions!');
-        setSelectionLabel('❌ Container not ready. Refresh page.');
+    // If still no height, wait a bit more and retry
+    if (rect.height === 0) {
+        console.warn('Container height is 0, waiting 200ms more...');
+        setTimeout(() => initGraph(payload), 200);
         return;
     }
 
