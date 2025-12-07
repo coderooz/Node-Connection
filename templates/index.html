@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
 
-  <!-- 3D Force Graph -->
-  <script src="https://unpkg.com/3d-force-graph"></script>
+  <!-- 3D Force Graph - PINNED VERSION -->
+  <script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
 
 </head>
 <body>
@@ -15,7 +15,7 @@
     <aside class="sidebar">
       <header class="sidebar-header">
         <div class="logo-badge">
-          <div class="logo-mark">CZ</div>
+          <div class="logo-mark">NI</div>
           <div class="logo-text">
             <div class="logo-text-main">Network Intelligence</div>
             <div class="logo-text-sub">Interactive 3D graph</div>
@@ -205,7 +205,7 @@
         <div class="graph-overlay-row">
           <div class="overlay-chip">
             <span>Selection</span>
-            <div id="selection-label">Hover or click a node to inspect neighbors.</div>
+            <div id="selection-label">Loading graph...</div>
           </div>
         </div>
       </div>

@@ -170,28 +170,16 @@
       "community": 2
     },
     {
-      "id": "NVidia",
-      "label": "Nvidia",
-      "category": "Chip",
-      "valuation": 10000000000000.0,
-      "role": "Manufacturer",
-      "company_type": "public",
-      "logo_url": "",
-      "metadata": {},
-      "influence": 0.0,
-      "community": 3
-    },
-    {
-      "id": "Relience",
+      "id": "Reliance",
       "label": "Reliance",
       "category": "Services",
-      "valuation": 10000.0,
+      "valuation": 10000,
       "role": "Electricity",
       "company_type": "Public",
       "logo_url": "",
       "metadata": {},
       "influence": 0.0,
-      "community": 4
+      "community": 3
     }
   ],
   "edges": [
@@ -378,14 +366,6 @@
     {
       "source": "Amazon",
       "target": "Anthropic",
-      "relationship_type": "investment",
-      "impact": 0.7,
-      "directed": true,
-      "metadata": {}
-    },
-    {
-      "source": "Amazon",
-      "target": "Google",
       "relationship_type": "investment",
       "impact": 0.7,
       "directed": true,
