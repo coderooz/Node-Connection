@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>3D Network Intelligence</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+
+  <!-- 3D Force Graph -->
+  <script src="https://unpkg.com/3d-force-graph"></script>
+
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <header class="sidebar-header">
+        <div class="logo-badge">
+          <div class="logo-mark">CZ</div>
+          <div class="logo-text">
+            <div class="logo-text-main">Network Intelligence</div>
+            <div class="logo-text-sub">Interactive 3D graph</div>
+          </div>
+        </div>
+        <div class="chip">
+          <span class="chip-dot"></span>
+          Live model
+        </div>
+      </header>
+
+      <!-- Node editor -->
+      <section class="panel">
+        <div class="panel-title">
+          <span>Node</span>
+          <div class="badge">Company / Entity</div>
+        </div>
+        <form id="node-form" class="panel-body">
+          <div class="field-group">
+            <div class="field">
+              <label for="node-id">ID / Name</label>
+              <input id="node-id" name="id" placeholder="e.g. OpenAI" required />
+            </div>
+            <div class="field">
+              <label for="node-label">Label (optional)</label>
+              <input id="node-label" name="label" placeholder="Display label" />
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="node-category">Category</label>
+              <input id="node-category" name="category" placeholder="AI Lab, Cloud, VC..." />
+            </div>
+            <div class="field">
+              <label for="node-role">Role</label>
+              <input id="node-role" name="role" placeholder="Model provider, GPU vendor..." />
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="node-valuation">Valuation (USD)</label>
+              <input id="node-valuation" name="valuation" type="number" step="1" min="0" placeholder="80000000000" />
+            </div>
+            <div class="field">
+              <label for="node-type">Company Type</label>
+              <input id="node-type" name="company_type" placeholder="Public, Private, Startup..." />
+            </div>
+          </div>
+          <div class="field">
+            <label for="node-logo">Logo / Avatar URL (optional)</label>
+            <input id="node-logo" name="logo_url" placeholder="https://..." />
+          </div>
+          <div class="button-row">
+            <button type="submit" class="btn">
+              Save Node
+            </button>
+            <button type="button" class="btn-secondary btn" id="node-reset">
+              Clear
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Edge editor -->
+      <section class="panel">
+        <div class="panel-title">
+          <span>Edge</span>
+          <div class="badge">Relationship</div>
+        </div>
+        <form id="edge-form" class="panel-body">
+          <div class="field-group">
+            <div class="field">
+              <label for="edge-source">Source</label>
+              <select id="edge-source" name="source"></select>
+            </div>
+            <div class="field">
+              <label for="edge-target">Target</label>
+              <select id="edge-target" name="target"></select>
+            </div>
+          </div>
+          <div class="field-group">
+            <div class="field">
+              <label for="edge-type">Type</label>
+              <select id="edge-type" name="relationship_type">
+                <option value="investment">Investment</option>
+                <option value="hardware">Hardware</option>
+                <option value="software">Software</option>
+                <option value="cloud">Cloud</option>
+                <option value="services">Services</option>
+                <option value="vc">VC</option>
+                <option value="research">Research</option>
+                <option value="partnership">Partnership</option>
+                <option value="supply">Supply</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="edge-impact">Impact (0.0–1.0)</label>
+              <input id="edge-impact" name="impact" type="number" step="0.05" min="0" max="1" value="0.7" />
+            </div>
+          </div>
+          <div class="button-row">
+            <button type="submit" class="btn">
+              Save Edge
+            </button>
+            <button type="button" class="btn-danger btn" id="edge-delete">
+              Delete Edge
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Graph actions -->
+      <section class="panel">
+        <div class="panel-title">
+          <span>Model</span>
+          <div class="badge">Analytics</div>
+        </div>
+        <div class="panel-body">
+          <div class="button-row">
+            <button type="button" class="btn-secondary btn" id="btn-reheat">
+              Re-layout graph
+            </button>
+            <button type="button" class="btn-secondary btn" id="btn-community">
+              Run community detection
+            </button>
+          </div>
+          <div class="button-row">
+            <button type="button" class="btn btn-ghost" id="btn-save">
+              Save model
+            </button>
+            <button type="button" class="btn btn-ghost" id="btn-reload">
+              Reload model
+            </button>
+          </div>
+          <div class="toggle-row">
+            <label>
+              <input type="checkbox" id="toggle-clusters" checked />
+              Use community colors
+            </label>
+            <label>
+              <input type="checkbox" id="toggle-pulse" checked />
+              Influence waves
+            </label>
+          </div>
+          <div class="status-bar">
+            <div>
+              Nodes: <strong id="status-nodes">–</strong> · Edges: <strong id="status-edges">–</strong>
+            </div>
+            <div>
+              Focus: <strong id="status-focus">None</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Node maintenance -->
+      <section class="panel">
+        <div class="panel-title">
+          <span>Maintenance</span>
+          <div class="badge">Danger zone</div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <label for="delete-node-select">Delete node</label>
+            <select id="delete-node-select"></select>
+          </div>
+          <div class="button-row">
+            <button type="button" class="btn-danger btn" id="btn-delete-node">
+              Delete selected node
+            </button>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <main class="graph-container">
+      <div id="3d-graph"></div>
+      <div class="graph-overlay">
+        <div class="graph-overlay-row">
+          <div class="overlay-chip">
+            <span>Search</span>
+            <input id="search-input" class="search-input" placeholder="Find node by name…" />
+            <button id="search-btn" class="btn-secondary btn">Go</button>
+          </div>
+        </div>
+        <div class="graph-overlay-row">
+          <div class="overlay-chip">
+            <span>Selection</span>
+            <div id="selection-label">Hover or click a node to inspect neighbors.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="context-menu" class="context-menu">
+        <button type="button" data-action="focus">Focus node</button>
+        <button type="button" data-action="neighbors">Highlight neighbors</button>
+        <button type="button" data-action="clear">Clear highlight</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

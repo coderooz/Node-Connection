@@ -1,0 +1,395 @@
+{
+  "version": 1,
+  "nodes": [
+    {
+      "id": "OpenAI",
+      "label": "OpenAI",
+      "category": "AI Lab",
+      "valuation": 80000000000,
+      "role": "Model provider",
+      "company_type": "Private",
+      "logo_url": null,
+      "metadata": {
+        "location": "San Francisco"
+      },
+      "influence": 0.7142857142857142,
+      "community": 1
+    },
+    {
+      "id": "Nvidia",
+      "label": "Nvidia",
+      "category": "GPU Hardware",
+      "valuation": 2500000000000,
+      "role": "GPU vendor",
+      "company_type": "Public",
+      "logo_url": null,
+      "metadata": {
+        "ticker": "NVDA"
+      },
+      "influence": 1.0,
+      "community": 0
+    },
+    {
+      "id": "Microsoft",
+      "label": "Microsoft",
+      "category": "Cloud & Software",
+      "valuation": 3100000000000,
+      "role": "Cloud provider / Investor",
+      "company_type": "Public",
+      "logo_url": null,
+      "metadata": {
+        "ticker": "MSFT"
+      },
+      "influence": 0.7142857142857142,
+      "community": 1
+    },
+    {
+      "id": "Oracle",
+      "label": "Oracle",
+      "category": "Cloud",
+      "valuation": 300000000000,
+      "role": "Cloud provider",
+      "company_type": "Public",
+      "logo_url": null,
+      "metadata": {
+        "ticker": "ORCL"
+      },
+      "influence": 0.14285714285714285,
+      "community": 1
+    },
+    {
+      "id": "AMD",
+      "label": "AMD",
+      "category": "GPU Hardware",
+      "valuation": 300000000000,
+      "role": "GPU vendor",
+      "company_type": "Public",
+      "logo_url": null,
+      "metadata": {
+        "ticker": "AMD"
+      },
+      "influence": 0.2857142857142857,
+      "community": 0
+    },
+    {
+      "id": "Intel",
+      "label": "Intel",
+      "category": "CPU / Foundry",
+      "valuation": 200000000000,
+      "role": "CPU / Foundry",
+      "company_type": "Public",
+      "logo_url": null,
+      "metadata": {
+        "ticker": "INTC"
+      },
+      "influence": 0.2857142857142857,
+      "community": 2
+    },
+    {
+      "id": "xAI",
+      "label": "xAI",
+      "category": "AI Lab",
+      "valuation": 24000000000,
+      "role": "Model provider",
+      "company_type": "Private",
+      "logo_url": null,
+      "metadata": {},
+      "influence": 0.14285714285714285,
+      "community": 0
+    },
+    {
+      "id": "CoreWeave",
+      "label": "CoreWeave",
+      "category": "AI Cloud",
+      "valuation": 19000000000,
+      "role": "GPU cloud",
+      "company_type": "Private",
+      "logo_url": null,
+      "metadata": {},
+      "influence": 0.5714285714285714,
+      "community": 0
+    },
+    {
+      "id": "Mistral",
+      "label": "Mistral AI",
+      "category": "AI Lab",
+      "valuation": 6000000000,
+      "role": "Model provider",
+      "company_type": "Startup",
+      "logo_url": null,
+      "metadata": {},
+      "influence": 0.2857142857142857,
+      "community": 0
+    },
+    {
+      "id": "FigureAI",
+      "label": "Figure AI",
+      "category": "Robotics",
+      "valuation": 2600000000,
+      "role": "Humanoid robots",
+      "company_type": "Startup",
+      "logo_url": null,
+      "metadata": {},
+      "influence": 0.2857142857142857,
+      "community": 1
+    },
+    {
+      "id": "Anthropic",
+      "label": "Anthropic",
+      "category": "AI Lab",
+      "valuation": 15000000000,
+      "role": "Model provider",
+      "company_type": "Private",
+      "logo_url": null,
+      "metadata": {},
+      "influence": 0.2857142857142857,
+      "community": 2
+    },
+    {
+      "id": "Google",
+      "label": "Google",
+      "category": "Cloud & AI",
+      "valuation": 2000000000000,
+      "role": "Cloud + AI",
+      "company_type": "Public",
+      "logo_url": null,
+      "metadata": {},
+      "influence": 0.42857142857142855,
+      "community": 2
+    },
+    {
+      "id": "Amazon",
+      "label": "Amazon",
+      "category": "Cloud",
+      "valuation": 1900000000000,
+      "role": "Cloud provider",
+      "company_type": "Public",
+      "logo_url": null,
+      "metadata": {},
+      "influence": 0.5714285714285714,
+      "community": 2
+    },
+    {
+      "id": "NVidia",
+      "label": "Nvidia",
+      "category": "Chip",
+      "valuation": 10000000000000.0,
+      "role": "Manufacturer",
+      "company_type": "public",
+      "logo_url": "",
+      "metadata": {},
+      "influence": 0.0,
+      "community": 3
+    },
+    {
+      "id": "Relience",
+      "label": "Reliance",
+      "category": "Services",
+      "valuation": 10000.0,
+      "role": "Electricity",
+      "company_type": "Public",
+      "logo_url": "",
+      "metadata": {},
+      "influence": 0.0,
+      "community": 4
+    }
+  ],
+  "edges": [
+    {
+      "source": "OpenAI",
+      "target": "FigureAI",
+      "relationship_type": "software",
+      "impact": 0.6,
+      "directed": true,
+      "metadata": {
+        "note": "Models for robotics"
+      }
+    },
+    {
+      "source": "Nvidia",
+      "target": "OpenAI",
+      "relationship_type": "hardware",
+      "impact": 0.85,
+      "directed": true,
+      "metadata": {
+        "note": "GPU supply"
+      }
+    },
+    {
+      "source": "Nvidia",
+      "target": "CoreWeave",
+      "relationship_type": "hardware",
+      "impact": 0.8,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Nvidia",
+      "target": "Microsoft",
+      "relationship_type": "hardware",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Nvidia",
+      "target": "Amazon",
+      "relationship_type": "hardware",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Nvidia",
+      "target": "Google",
+      "relationship_type": "hardware",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Nvidia",
+      "target": "xAI",
+      "relationship_type": "hardware",
+      "impact": 0.8,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Nvidia",
+      "target": "Mistral",
+      "relationship_type": "hardware",
+      "impact": 0.6,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Microsoft",
+      "target": "OpenAI",
+      "relationship_type": "cloud",
+      "impact": 0.9,
+      "directed": true,
+      "metadata": {
+        "note": "Azure supercomputing"
+      }
+    },
+    {
+      "source": "Microsoft",
+      "target": "FigureAI",
+      "relationship_type": "investment",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Oracle",
+      "target": "OpenAI",
+      "relationship_type": "cloud",
+      "impact": 0.6,
+      "directed": true,
+      "metadata": {
+        "note": "OCI for training"
+      }
+    },
+    {
+      "source": "AMD",
+      "target": "CoreWeave",
+      "relationship_type": "hardware",
+      "impact": 0.5,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "AMD",
+      "target": "Microsoft",
+      "relationship_type": "hardware",
+      "impact": 0.4,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Intel",
+      "target": "Microsoft",
+      "relationship_type": "hardware",
+      "impact": 0.2,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Intel",
+      "target": "Amazon",
+      "relationship_type": "hardware",
+      "impact": 0.2,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "xAI",
+      "target": "Nvidia",
+      "relationship_type": "services",
+      "impact": 0.4,
+      "directed": true,
+      "metadata": {
+        "note": "Model customer"
+      }
+    },
+    {
+      "source": "CoreWeave",
+      "target": "OpenAI",
+      "relationship_type": "cloud",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {
+        "note": "Specialized GPU cloud"
+      }
+    },
+    {
+      "source": "Mistral",
+      "target": "CoreWeave",
+      "relationship_type": "cloud",
+      "impact": 0.5,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Anthropic",
+      "target": "Amazon",
+      "relationship_type": "cloud",
+      "impact": 0.8,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Anthropic",
+      "target": "Google",
+      "relationship_type": "cloud",
+      "impact": 0.6,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Google",
+      "target": "Anthropic",
+      "relationship_type": "investment",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Amazon",
+      "target": "Anthropic",
+      "relationship_type": "investment",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Amazon",
+      "target": "Google",
+      "relationship_type": "investment",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    }
+  ]
+}

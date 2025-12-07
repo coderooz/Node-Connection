@@ -1,0 +1,11 @@
+{
+  "backgroundColor": "#050816",
+  "nodeSizeMin": 4,
+  "nodeSizeMax": 20,
+  "linkCurvature": 0.3,
+  "linkOpacity": 0.8,
+  "linkWidthFactor": 3.5,
+  "arrowLength": 5,
+  "particleSpeed": 0.007,
+  "velocityDecay": 0.25
+}

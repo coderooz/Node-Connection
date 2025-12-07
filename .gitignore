@@ -1,0 +1,107 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
+wheelhouse/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# pyenv
+.python-version
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# type checkers / caches
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# dotenv and secrets
+.env
+.env.*
+credentials.json
+secrets.json
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Misc
+*.bak
+*.tmp
+*.swp
