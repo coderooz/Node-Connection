@@ -12,8 +12,8 @@
       "metadata": {
         "location": "San Francisco"
       },
-      "influence": 0.7142857142857142,
-      "community": 1
+      "influence": -1.4597265924955766e-15,
+      "community": 2
     },
     {
       "id": "Nvidia",
@@ -26,7 +26,7 @@
       "metadata": {
         "ticker": "NVDA"
       },
-      "influence": 1.0,
+      "influence": 3.1561656053958413e-16,
       "community": 0
     },
     {
@@ -40,8 +40,8 @@
       "metadata": {
         "ticker": "MSFT"
       },
-      "influence": 0.7142857142857142,
-      "community": 1
+      "influence": -1.5780828026979207e-16,
+      "community": 2
     },
     {
       "id": "Oracle",
@@ -54,8 +54,8 @@
       "metadata": {
         "ticker": "ORCL"
       },
-      "influence": 0.14285714285714285,
-      "community": 1
+      "influence": 0.0,
+      "community": 2
     },
     {
       "id": "AMD",
@@ -68,7 +68,7 @@
       "metadata": {
         "ticker": "AMD"
       },
-      "influence": 0.2857142857142857,
+      "influence": 0.0,
       "community": 0
     },
     {
@@ -82,8 +82,8 @@
       "metadata": {
         "ticker": "INTC"
       },
-      "influence": 0.2857142857142857,
-      "community": 2
+      "influence": 0.0,
+      "community": 1
     },
     {
       "id": "xAI",
@@ -94,7 +94,7 @@
       "company_type": "Private",
       "logo_url": null,
       "metadata": {},
-      "influence": 0.14285714285714285,
+      "influence": -1.5780828026979207e-16,
       "community": 0
     },
     {
@@ -106,7 +106,7 @@
       "company_type": "Private",
       "logo_url": null,
       "metadata": {},
-      "influence": 0.5714285714285714,
+      "influence": -4.734248408093762e-16,
       "community": 0
     },
     {
@@ -118,7 +118,7 @@
       "company_type": "Startup",
       "logo_url": null,
       "metadata": {},
-      "influence": 0.2857142857142857,
+      "influence": -7.890414013489603e-17,
       "community": 0
     },
     {
@@ -130,8 +130,8 @@
       "company_type": "Startup",
       "logo_url": null,
       "metadata": {},
-      "influence": 0.2857142857142857,
-      "community": 1
+      "influence": -1.1046579618885445e-15,
+      "community": 2
     },
     {
       "id": "Anthropic",
@@ -142,8 +142,8 @@
       "company_type": "Private",
       "logo_url": null,
       "metadata": {},
-      "influence": 0.2857142857142857,
-      "community": 2
+      "influence": 1.0,
+      "community": 1
     },
     {
       "id": "Google",
@@ -154,8 +154,8 @@
       "company_type": "Public",
       "logo_url": null,
       "metadata": {},
-      "influence": 0.42857142857142855,
-      "community": 2
+      "influence": 0.6060915267313268,
+      "community": 1
     },
     {
       "id": "Amazon",
@@ -166,8 +166,8 @@
       "company_type": "Public",
       "logo_url": null,
       "metadata": {},
-      "influence": 0.5714285714285714,
-      "community": 2
+      "influence": 0.8081220356417688,
+      "community": 1
     },
     {
       "id": "Reliance",
@@ -177,6 +177,18 @@
       "role": "Electricity",
       "company_type": "Public",
       "logo_url": "",
+      "metadata": {},
+      "influence": 0.0,
+      "community": 1
+    },
+    {
+      "id": "Facebook",
+      "label": "FaceBook",
+      "category": "Social",
+      "valuation": 15000.0,
+      "role": "Data Provider",
+      "company_type": "Public",
+      "logo_url": null,
       "metadata": {},
       "influence": 0.0,
       "community": 3
@@ -368,6 +380,22 @@
       "target": "Anthropic",
       "relationship_type": "investment",
       "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Reliance",
+      "target": "Google",
+      "relationship_type": "investment",
+      "impact": 0.7,
+      "directed": true,
+      "metadata": {}
+    },
+    {
+      "source": "Facebook",
+      "target": "Reliance",
+      "relationship_type": "cloud",
+      "impact": 0.85,
       "directed": true,
       "metadata": {}
     }

@@ -1,0 +1,16 @@
+# Core dependencies
+Flask==3.0.0
+networkx==3.2.1
+
+# Desktop app support (optional)
+pywebview==4.4.1
+
+# Development dependencies (optional)
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.12.0
+flake8==6.1.0
+mypy==1.7.1
+
+# Recommended but not required
+python-dotenv==1.0.0

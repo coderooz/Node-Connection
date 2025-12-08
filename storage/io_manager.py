@@ -1,33 +1,84 @@
-from __future__ import annotations
-
+"""
+Graph persistence - loading and saving.
+"""
 import json
 from pathlib import Path
-from typing import Any, Dict
+from typing import Dict, Any
 
-from model import GraphModel, Node
+from core.graph_model import GraphModel
+from core.node import Node
+from utils.logger import get_logger
 
-BASE_DIR = Path(__file__).resolve().parents[1]
-DEFAULT_PATH = BASE_DIR / "storage" / "default_network.json"
+logger = get_logger(__name__)
 
 
 def load_graph(path: Path) -> GraphModel:
+    """
+    Load graph from JSON file.
+    
+    Args:
+        path: Path to JSON file
+        
+    Returns:
+        GraphModel instance
+        
+    Raises:
+        FileNotFoundError: If file doesn't exist
+        json.JSONDecodeError: If file is invalid JSON
+    """
     if not path.exists():
-        return GraphModel()
+        raise FileNotFoundError(f"Graph file not found: {path}")
+    
+    logger.info(f"Loading graph from {path}")
+    
     with path.open("r", encoding="utf-8") as f:
         data: Dict[str, Any] = json.load(f)
-    return GraphModel.from_json(data)
+    
+    model = GraphModel.from_json(data)
+    logger.info(f"Loaded graph: {model.summary()}")
+    
+    return model
 
 
 def save_graph(model: GraphModel, path: Path) -> None:
+    """
+    Save graph to JSON file.
+    
+    Args:
+        model: GraphModel to save
+        path: Output path
+    """
+    # Ensure directory exists
     path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Export to JSON
     data = model.to_json()
+    
+    # Write to file
     with path.open("w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    
+    logger.info(f"Saved graph to {path}: {model.summary()}")
 
 
 def load_or_init_graph(path: Path) -> GraphModel:
+    """
+    Load graph from file, or create demo graph if file doesn't exist.
+    
+    Args:
+        path: Path to JSON file
+        
+    Returns:
+        GraphModel instance
+    """
     if path.exists():
-        return load_graph(path)
+        try:
+            return load_graph(path)
+        except Exception as e:
+            logger.error(f"Error loading graph from {path}: {e}")
+            logger.info("Creating demo graph instead")
+    
+    # Create and save demo graph
     model = create_demo_graph()
     save_graph(model, path)
     return model
@@ -35,18 +86,22 @@ def load_or_init_graph(path: Path) -> GraphModel:
 
 def create_demo_graph() -> GraphModel:
     """
-    Seed graph with demo company relationships:
-    OpenAI, Nvidia, Microsoft, Oracle, AMD, Intel, xAI, CoreWeave, Mistral, Figure AI, etc.
+    Create a demo network graph with sample companies.
+    
+    Returns:
+        GraphModel with demo data
     """
+    logger.info("Creating demo graph")
+    
     gm = GraphModel()
-
-    # Nodes
+    
+    # Define companies
     companies = [
         Node(
             id="OpenAI",
             label="OpenAI",
             category="AI Lab",
-            valuation=80000000000,
+            valuation=80_000_000_000,
             role="Model provider",
             company_type="Private",
             metadata={"location": "San Francisco"},
@@ -55,7 +110,7 @@ def create_demo_graph() -> GraphModel:
             id="Nvidia",
             label="Nvidia",
             category="GPU Hardware",
-            valuation=2500000000000,
+            valuation=2_500_000_000_000,
             role="GPU vendor",
             company_type="Public",
             metadata={"ticker": "NVDA"},
@@ -64,7 +119,7 @@ def create_demo_graph() -> GraphModel:
             id="Microsoft",
             label="Microsoft",
             category="Cloud & Software",
-            valuation=3100000000000,
+            valuation=3_100_000_000_000,
             role="Cloud provider / Investor",
             company_type="Public",
             metadata={"ticker": "MSFT"},
@@ -73,7 +128,7 @@ def create_demo_graph() -> GraphModel:
             id="Oracle",
             label="Oracle",
             category="Cloud",
-            valuation=300000000000,
+            valuation=300_000_000_000,
             role="Cloud provider",
             company_type="Public",
             metadata={"ticker": "ORCL"},
@@ -82,7 +137,7 @@ def create_demo_graph() -> GraphModel:
             id="AMD",
             label="AMD",
             category="GPU Hardware",
-            valuation=300000000000,
+            valuation=300_000_000_000,
             role="GPU vendor",
             company_type="Public",
             metadata={"ticker": "AMD"},
@@ -91,7 +146,7 @@ def create_demo_graph() -> GraphModel:
             id="Intel",
             label="Intel",
             category="CPU / Foundry",
-            valuation=200000000000,
+            valuation=200_000_000_000,
             role="CPU / Foundry",
             company_type="Public",
             metadata={"ticker": "INTC"},
@@ -100,7 +155,7 @@ def create_demo_graph() -> GraphModel:
             id="xAI",
             label="xAI",
             category="AI Lab",
-            valuation=24000000000,
+            valuation=24_000_000_000,
             role="Model provider",
             company_type="Private",
         ),
@@ -108,7 +163,7 @@ def create_demo_graph() -> GraphModel:
             id="CoreWeave",
             label="CoreWeave",
             category="AI Cloud",
-            valuation=19000000000,
+            valuation=19_000_000_000,
             role="GPU cloud",
             company_type="Private",
         ),
@@ -116,7 +171,7 @@ def create_demo_graph() -> GraphModel:
             id="Mistral",
             label="Mistral AI",
             category="AI Lab",
-            valuation=6000000000,
+            valuation=6_000_000_000,
             role="Model provider",
             company_type="Startup",
         ),
@@ -124,7 +179,7 @@ def create_demo_graph() -> GraphModel:
             id="FigureAI",
             label="Figure AI",
             category="Robotics",
-            valuation=2600000000,
+            valuation=2_600_000_000,
             role="Humanoid robots",
             company_type="Startup",
         ),
@@ -132,7 +187,7 @@ def create_demo_graph() -> GraphModel:
             id="Anthropic",
             label="Anthropic",
             category="AI Lab",
-            valuation=15000000000,
+            valuation=15_000_000_000,
             role="Model provider",
             company_type="Private",
         ),
@@ -140,7 +195,7 @@ def create_demo_graph() -> GraphModel:
             id="Google",
             label="Google",
             category="Cloud & AI",
-            valuation=2000000000000,
+            valuation=2_000_000_000_000,
             role="Cloud + AI",
             company_type="Public",
         ),
@@ -148,49 +203,54 @@ def create_demo_graph() -> GraphModel:
             id="Amazon",
             label="Amazon",
             category="Cloud",
-            valuation=1900000000000,
+            valuation=1_900_000_000_000,
             role="Cloud provider",
             company_type="Public",
         ),
     ]
-
-    for node in companies:
-        gm.add_or_update_node(node)
-
-    # Edges (relationships)
+    
+    # Add nodes
+    for company in companies:
+        gm.add_or_update_node(company)
+    
+    # Define relationships
     add = gm.add_or_update_edge
-
-    # Investment & partnership edges
-    add("Microsoft", "OpenAI", "investment", 0.95, {"note": "Strategic partnership"})
-    add("Microsoft", "OpenAI", "cloud", 0.9, {"note": "Azure supercomputing"})
+    
+    # Hardware supply relationships
     add("Nvidia", "OpenAI", "hardware", 0.85, {"note": "GPU supply"})
-    add("Oracle", "OpenAI", "cloud", 0.6, {"note": "OCI for training"})
-    add("CoreWeave", "OpenAI", "cloud", 0.7, {"note": "Specialized GPU cloud"})
-
     add("Nvidia", "CoreWeave", "hardware", 0.8)
     add("Nvidia", "Microsoft", "hardware", 0.7)
     add("Nvidia", "Amazon", "hardware", 0.7)
     add("Nvidia", "Google", "hardware", 0.7)
-
-    add("Microsoft", "FigureAI", "investment", 0.7)
-    add("OpenAI", "FigureAI", "software", 0.6, {"note": "Models for robotics"})
-
-    add("Google", "Anthropic", "investment", 0.7)
-    add("Amazon", "Anthropic", "investment", 0.7)
-    add("Anthropic", "Amazon", "cloud", 0.8)
-    add("Anthropic", "Google", "cloud", 0.6)
-
     add("Nvidia", "xAI", "hardware", 0.8)
-    add("xAI", "Nvidia", "services", 0.4, {"note": "Model customer"})
-
     add("Nvidia", "Mistral", "hardware", 0.6)
-    add("Mistral", "CoreWeave", "cloud", 0.5)
-
+    
     add("AMD", "CoreWeave", "hardware", 0.5)
     add("AMD", "Microsoft", "hardware", 0.4)
     add("Intel", "Microsoft", "hardware", 0.2)
     add("Intel", "Amazon", "hardware", 0.2)
-
+    
+    # Cloud relationships
+    add("Microsoft", "OpenAI", "cloud", 0.9, {"note": "Azure supercomputing"})
+    add("Oracle", "OpenAI", "cloud", 0.6, {"note": "OCI for training"})
+    add("CoreWeave", "OpenAI", "cloud", 0.7, {"note": "Specialized GPU cloud"})
+    add("Mistral", "CoreWeave", "cloud", 0.5)
+    add("Anthropic", "Amazon", "cloud", 0.8)
+    add("Anthropic", "Google", "cloud", 0.6)
+    
+    # Investment relationships
+    add("Microsoft", "FigureAI", "investment", 0.7)
+    add("Google", "Anthropic", "investment", 0.7)
+    add("Amazon", "Anthropic", "investment", 0.7)
+    
+    # Software/Services
+    add("OpenAI", "FigureAI", "software", 0.6, {"note": "Models for robotics"})
+    add("xAI", "Nvidia", "services", 0.4, {"note": "Model customer"})
+    
+    # Compute analytics
     gm.compute_influence()
     gm.compute_communities()
+    
+    logger.info(f"Created demo graph: {gm.summary()}")
+    
     return gm

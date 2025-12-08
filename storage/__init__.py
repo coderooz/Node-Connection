@@ -1,10 +1,4 @@
-from pathlib import Path
+"""Storage and persistence layer."""
+from .io_manager import load_graph, save_graph, load_or_init_graph
 
-from .io_manager import (
-    DEFAULT_PATH,
-    load_graph,
-    load_or_init_graph,
-    save_graph,
-)
-
-__all__ = ["DEFAULT_PATH", "load_graph", "load_or_init_graph", "save_graph"]
+__all__ = ["load_graph", "save_graph", "load_or_init_graph"]
