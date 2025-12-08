@@ -1,4 +1,4 @@
-# 3D Network Intelligence – Interactive Graph Visualizer
+# Node-Connection – Interactive Graph Visualizer
 
 A professional, interactive **3D WebGL network visualization system** for exploring company relationships, dependency graphs, and network intelligence.
 
@@ -46,8 +46,8 @@ A professional, interactive **3D WebGL network visualization system** for explor
 
 1. **Clone the repository**
 ```bash
-git clone <repository-url>
-cd network-intelligence
+git clone https://github.com/coderooz/Node-Connection
+cd Node-Connection
 ```
 
 2. **Create a virtual environment** (recommended)
