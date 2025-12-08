@@ -19,10 +19,10 @@
 }
 
 html, body {
+    height: 100vh;
+    width: 100%;
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
     overflow: hidden;
 }
 
@@ -33,10 +33,11 @@ body {
 }
 
 .app-shell {
-    display: flex;
-    width: 100%;
-    height: 100vh;
     overflow: hidden;
+    display: flex;
+    height: 100vh; /* KEEP */
+    width: 100vw;  /* ADD — ensures full viewport */
+    
 }
 
 .sidebar {
@@ -321,8 +322,9 @@ input:focus, select:focus {
 
 /* CRITICAL FIX: Ensure graph container has proper height */
 .graph-container {
-    flex: 1;
-    min-height: 0; /* Critical for flexbox children */
+    flex: 1 1 auto; /* 💥 this line is the key difference */
+    height: 100%;
+    min-height: 100%; /* ensure actual pixels */
     min-width: 0;
     position: relative;
     overflow: hidden;
@@ -335,8 +337,10 @@ input:focus, select:focus {
     width: 100%;
     height: 100%;
     flex: 1; /* Changed from just width/height */
-    display: block;
     position: relative;
+    flex-grow: 1;
+    display: block;
+    min-height: 100px;
 }
 
 .graph-overlay {
